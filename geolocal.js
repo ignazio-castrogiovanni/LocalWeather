@@ -8,7 +8,6 @@ function successFunction(position) {
   var lng = position.coords.longitude;
   codeLatLng(lat, lng);
   getWeather(lat, lng);
-  alert(lat + "-" + lng);
 }
 
 function errorFunction() {
@@ -38,7 +37,6 @@ function codeLatLng(lat, lng) {
             }
           }
         }
-        alert(city.short_name);
         addTextSpan(city.short_name, "city");
 
       } else {
@@ -60,7 +58,7 @@ function getWeather(lat, lng) {
     }
   }
   var URL = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng;
-alert(URL);
+  
   xhr.open("GET", URL, false);
   xhr.send();
 
@@ -141,10 +139,9 @@ tempElem.addEventListener("click",change_cent_fahr);
 function addTemperaturePic(tempNormalised) {
   var picTemp = '';
   if (tempNormalised > 70) {
-    alert("Major");
+
     picTemp = 'http://img1.findthebest.com/sites/default/files/2850/media/images/_619779_i0.png';
   } else {
-    alert("Minor");
     picTemp = 'https://cdn4.iconfinder.com/data/icons/weather-conditions/512/high_temperature-512.png';
   }
   addPic(picTemp,"tempPic");

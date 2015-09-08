@@ -8,6 +8,7 @@ function successFunction(position) {
   var lng = position.coords.longitude;
   codeLatLng(lat, lng);
   getWeather(lat, lng);
+  alert(lat + "-" + lng);
 }
 
 function errorFunction() {
@@ -26,7 +27,7 @@ function codeLatLng(lat, lng) {
     if (status == google.maps.GeocoderStatus.OK) {
       console.log(results);
       if (results[1]) {
-        addParag(results[0].formatted_address, "city");
+        addParag(results[0].formatted_address, "full-address");
 
         for (var i = 0; i < results[0].address_components.length; i++) {
           for (var b = 0; b < results[0].address_components[i].types.length; b++) {
@@ -38,7 +39,7 @@ function codeLatLng(lat, lng) {
           }
         }
         alert(city.short_name);
-        addParag(city.short_name, "city");
+        addTextSpan(city.short_name, "city");
 
       } else {
         alert("No results found");
@@ -59,7 +60,7 @@ function getWeather(lat, lng) {
     }
   }
   var URL = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng;
-
+alert(URL);
   xhr.open("GET", URL, false);
   xhr.send();
 
@@ -68,11 +69,22 @@ function getWeather(lat, lng) {
 
 function parseJSONWeather(result) {
   var wheaterCond = result.weather[0].main;
-  addParag(wheaterCond, "Weather");
+  //addParag(wheaterCond, "Weather");
   var weatherDescr = result.weather[0].description;
-  addParag(weatherDescr, "WeatherDesc");
-  var temp = result.weather[0].main.temp;
-  addParag(temp, "Temperature");
+  addTextSpan(weatherDescr, "WeatherDesc");
+  var temp = result.main.temp;
+  addTextSpan(temp, "Temperature");
+  
+  // Sunrise Time
+  var sunriseTime = new Date(result.sys.sunrise * 1000);
+  var sunriseFormattedTime = sunriseTime.getHours() + ":" + sunriseTime.getMinutes();
+  addParag("Sunrise time : " + sunriseFormattedTime, "sunriseTime");
+  
+  // Sunset Time
+  var sunsetTime = new Date(result.sys.sunset * 1000);
+  var sunsetFormattedTime = sunsetTime.getHours() + ":" + sunsetTime.getMinutes();
+  addParag("Sunset time  " + sunsetFormattedTime, "sunsetTime");
+  
   var picLink = getWeatherPicLink(wheaterCond);
 //
   var bodyEl = document.getElementsByTagName("body")[0];
@@ -101,6 +113,14 @@ function addParag(text, id) {
   newParag.appendChild(textNode);
   var divElem = document.getElementById(id);
   divElem.appendChild(newParag);
+}
+
+function addTextSpan(text, recipientId) {
+  var newSpan = document.createElement("span");
+  var textNode = document.createTextNode(text);
+  newSpan.appendChild(textNode);
+  var divElem = document.getElementById(recipientId);
+  divElem.appendChild(newSpan);
 }
 
 function addPic(picLink, id) {

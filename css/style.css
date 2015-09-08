@@ -11,3 +11,36 @@ p {
   font-family: 'Arvo';
   text-align: center;
 }
+
+.span-center {
+  text-align: center;
+  font-style: bold;
+}
+
+#full-address {
+  font-style: italic;
+}
+
+#main_container {
+  max-width: 40%;
+}
+
+.margin {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.server-action-menu {
+    background-color: trasparent;
+    opacity: 0.9;
+    background-repeat: repeat;
+    border-radius:5px;
+    padding: 25px;
+}
+
+img{
+     position: absolute;
+     max-width: 30%;
+     top: 10%;
+     left: 10%;
+}

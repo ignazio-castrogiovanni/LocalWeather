@@ -1,24 +1,29 @@
 <head>
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
 <title>Local weather using Geocoding</title>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 </head>
 <body onLoad="initialize()">
   <h1>Your local weather</h1>
   
-<div id = "city">
+  <div class = "container" id = "main_container">
+    <div class = "row">
+      <div class = "col-md-12" id = "full-address"></div>
+    </div>
+    <div class = "row">
+      <div class = "col-md-4 well well-lg span-center server-action-menu" id = "city"></div>
+      <div class = "col-md-4 well well-lg span-center server-action-menu" id = "WeatherDesc"></div>
+      <div>
+        <div class = "col-md-4 well well-lg span-center server-action-menu" id = "Temperature"><img src = "http://questgarden.com/73/22/1/081118131437/images/hot.jpg">
+        <!-- <img src = "https://cdn4.iconfinder.com/data/icons/weather-conditions/512/high_temperature-512.png"></div> -->
+      </div>
+    </div>
   </div>
-  <div id = "Weather">
-  </div>
-  <div id = "WeatherDesc">
-  </div>
+  
   <!--<div id = "TempPicture">
-  </div>
-  <div id = "Temperature"<
   </div>-->
-<!--<div id = "sunriseTime">
+<div id = "sunriseTime">
 </div>
 <div id = "sunsetTime">
-</div> -->
+</div> 
 </body>

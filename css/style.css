@@ -41,6 +41,7 @@ p {
 img{
      position: absolute;
      max-width: 30%;
+     max-height: 90%;
      top: 10%;
      left: 10%;
 }

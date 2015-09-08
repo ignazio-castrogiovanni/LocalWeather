@@ -72,8 +72,11 @@ function parseJSONWeather(result) {
   //addParag(wheaterCond, "Weather");
   var weatherDescr = result.weather[0].description;
   addTextSpan(weatherDescr, "WeatherDesc");
-  var temp = result.main.temp;
-  addTextSpan(temp, "Temperature");
+  var temp = result.main.temp * 9 / 5 - 459.67;
+  var tempNormalised = Math.floor(temp*100) / 100; // Add the Fahreneit letter
+  var tempToString = tempNormalised +'F';
+  addTemperaturePic(tempNormalised);
+  addTextSpan(tempToString, "Temperature");
   
   // Sunrise Time
   var sunriseTime = new Date(result.sys.sunrise * 1000);
@@ -130,4 +133,34 @@ function addPic(picLink, id) {
   newImg.setAttributeNode(imgSrc);
   var divElem = document.getElementById(id);
   divElem.appendChild(newImg);
+}
+
+var tempElem = document.getElementById("Temperature");
+tempElem.addEventListener("click",change_cent_fahr);
+
+function addTemperaturePic(tempNormalised) {
+  var picTemp = '';
+  if (tempNormalised > 70) {
+    alert("Major");
+    picTemp = 'http://img1.findthebest.com/sites/default/files/2850/media/images/_619779_i0.png';
+  } else {
+    alert("Minor");
+    picTemp = 'https://cdn4.iconfinder.com/data/icons/weather-conditions/512/high_temperature-512.png';
+  }
+  addPic(picTemp,"tempPic");
+}
+function change_cent_fahr() { 
+  // Define the regexp pattern
+  var regExpPattern = /([\d.]+)([C|F])/;
+  var degrees = tempElem.textContent;
+  var arrMatch = regExpPattern.exec(degrees);
+  
+  var number = arrMatch[1];
+  var degree_type = arrMatch[2];
+  
+  if(degree_type == "C") {
+    tempElem.textContent =  + Math.floor(number * 100) / 100 * 9 / 5 + 32 + "F";
+  } else {
+    tempElem.textContent = (Math.floor(number * 100) / 100 - 32 ) * 5 / 9 + "C";
+  }
 }
